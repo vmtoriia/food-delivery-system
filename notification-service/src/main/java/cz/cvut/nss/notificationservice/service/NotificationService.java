@@ -45,6 +45,12 @@ public class NotificationService {
 
     public Notification markAsSent(String id) {
         Notification notification = findById(id);
+
+        System.out.println("[NOTIFICATION SENT] recipientId="
+                + notification.getRecipientId()
+                + ", type=" + notification.getType()
+                + ", message=" + notification.getMessage());
+
         notification.setStatus(NotificationStatus.SENT);
         return notificationRepository.save(notification);
     }
