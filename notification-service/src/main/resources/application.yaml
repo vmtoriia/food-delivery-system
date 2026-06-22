@@ -3,15 +3,24 @@ spring:
     name: notification-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/smart_food
+    url: jdbc:postgresql://localhost:5434/smart_food
     username: nss
     password: nss
     driver-class-name: org.postgresql.Driver
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
 
 server:
   port: 8083
