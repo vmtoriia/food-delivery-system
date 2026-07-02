@@ -68,4 +68,18 @@ public class OrderService {
 
         return savedOrder;
     }
+
+    @Transactional
+    public Order updateOrderStatus(String orderId, OrderStatus newStatus) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        order.setStatus(newStatus);
+        Order savedOrder = orderRepository.save(order);
+
+        // Відправляємо івент в Kafka про зміну статусу
+        kafkaTemplate.send("order-events", "Order " + orderId + " status changed to " + newStatus);
+
+        return savedOrder;
+    }
 }
