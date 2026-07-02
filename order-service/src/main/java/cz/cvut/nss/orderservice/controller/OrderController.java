@@ -2,6 +2,7 @@ package cz.cvut.nss.orderservice.controller;
 
 import cz.cvut.nss.orderservice.dto.CreateOrderRequest;
 import cz.cvut.nss.orderservice.entity.Order;
+import cz.cvut.nss.orderservice.entity.OrderStatus;
 import cz.cvut.nss.orderservice.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,9 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED) // Returns 201 Created instead of 200 OK
     public Order createOrder(@Valid @RequestBody CreateOrderRequest request) {
         return orderService.createOrder(request);
+    }
+    @PatchMapping("/{id}/status")
+    public Order updateOrderStatus(@PathVariable String id, @RequestParam OrderStatus status) {
+        return orderService.updateOrderStatus(id, status);
     }
 }
