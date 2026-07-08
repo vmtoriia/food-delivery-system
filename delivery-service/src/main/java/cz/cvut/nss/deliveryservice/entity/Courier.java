@@ -12,12 +12,12 @@ import lombok.*;
 public class Courier {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id; // [cite: 81]
+    private String id;
 
     @Column(nullable = false)
-    private String name; // [cite: 82]
+    private String name;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private CourierStatus status; // [cite: 83]
+    private CourierStatus status;
 }
