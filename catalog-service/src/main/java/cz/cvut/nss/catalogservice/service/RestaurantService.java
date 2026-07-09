@@ -3,6 +3,7 @@ package cz.cvut.nss.catalogservice.service;
 import cz.cvut.nss.catalogservice.dto.CreateRestaurantRequest;
 import cz.cvut.nss.catalogservice.entity.Restaurant;
 import cz.cvut.nss.catalogservice.repository.RestaurantRepository;
+import org.springframework.cache.annotation.Cacheable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
+    @Cacheable(value = "restaurants")
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
