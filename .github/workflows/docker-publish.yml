@@ -22,7 +22,28 @@ jobs:
         run: |
           cd order-service
           docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-order-service:1.0 .
-
-      - name: Push order-service image
-        run: |
           docker push ${{ secrets.DOCKER_VMTORIIA }}/my-order-service:1.0
+
+      - name: Build catalog-service image
+        run: |
+          cd catalog-service
+          docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-catalog-service:1.0 .  
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-catalog-service:1.0
+          
+      - name: Build delivery-service image
+        run: |
+          cd delivery-service
+          docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-delivery-service:1.0 .  
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-delivery-service:1.0
+
+      - name: Build notification-service image
+        run: |
+          cd notification-service
+          docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-notification-service:1.0 .  
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-notification-service:1.0          
+
+      - name: Build user-service image
+        run: |
+          cd user-service
+          docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-user-service:1.0 .  
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-user-service:1.0
