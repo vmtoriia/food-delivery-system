@@ -25,4 +25,4 @@ jobs:
 
       - name: Push order-service image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-order-service:1.0
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-order-service:1.0
