@@ -45,4 +45,11 @@ public class MenuItemController {
     public List<MenuItem> searchMenuItems(@RequestParam String query) {
         return menuItemService.searchMenuItems(query);
     }
+
+    @GetMapping("/menu-items/{id}")
+    public MenuItem getMenuItemById(@PathVariable String id) {
+        // Assuming your MenuItemService has a method like this.
+        // If it's named differently, update it to match!
+        return menuItemService.getMenuItem(id);
+    }
 }

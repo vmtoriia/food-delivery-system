@@ -21,6 +21,11 @@ public class MenuItemService {
         return menuItemRepository.findByRestaurantId(restaurantId);
     }
 
+    public MenuItem getMenuItem(String id) {
+        return menuItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Menu item with ID " + id + " not found"));
+    }
+
     public MenuItem createMenuItem(String restaurantId, CreateMenuItemRequest request) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found"));
