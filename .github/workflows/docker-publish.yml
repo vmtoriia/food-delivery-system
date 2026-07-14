@@ -49,7 +49,10 @@ jobs:
           docker push ${{ secrets.DOCKER_VMTORIIA }}/my-user-service:1.0
 
       - name: Build and Push api-gateway
-          run: |
-            cd api-gateway
-            docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-api-gateway:1.0 .
-            docker push ${{ secrets.DOCKER_VMTORIIA }}/my-api-gateway:1.0
+        run: |
+          cd api-gateway
+          docker build -t ${{ secrets.DOCKER_VMTORIIA }}/my-api-gateway:1.0 .
+          docker push ${{ secrets.DOCKER_VMTORIIA }}/my-api-gateway:1.0
+          
+          
+
