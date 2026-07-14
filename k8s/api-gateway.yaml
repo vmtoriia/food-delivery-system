@@ -1,0 +1,40 @@
+# 1. THE DEPLOYMENT (The Gateway Manager)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: vmtoriia/my-api-gateway:1.0
+          # Standard Spring Cloud Gateway port
+          ports:
+            - containerPort: 8080
+          env:
+            # Telling the gateway where to find the internal order-service
+            - name: ORDER_SERVICE_URL
+              value: http://order-service:8082
+
+---
+# 2. THE SERVICE (The Public Door)
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: api-gateway
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

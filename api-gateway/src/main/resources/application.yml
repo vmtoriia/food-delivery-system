@@ -8,21 +8,21 @@ spring:
     gateway:
       routes:
         - id: catalog-service
-          uri: http://localhost:8081
+          uri: ${CATALOG_SERVICE_URL:http://localhost:8081}
           predicates:
             - Path=/restaurants/**, /menu-items/**
 
         - id: order-service
-          uri: http://localhost:8082
+          uri: ${ORDER_SERVICE_URL:http://localhost:8082}
           predicates:
             - Path=/orders/**
 
         - id: delivery-service
-          uri: http://localhost:8084
+          uri: ${DELIVERY_SERVICE_URL:http://localhost:8084}
           predicates:
             - Path=/couriers/**
 
         - id: user-service
-          uri: http://localhost:8085
+          uri: ${USER_SERVICE_URL:http://localhost:8085}
           predicates:
             - Path=/customers/**
