@@ -23,7 +23,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final CatalogServiceClient catalogServiceClient;
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    //    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Transactional
     public Order createOrder(cz.cvut.nss.orderservice.dto.CreateOrderRequest request) {
@@ -64,7 +64,7 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
 
         // 4. Asynchronously notify the rest of the system via Kafka
-        kafkaTemplate.send("order-events", "New order created: " + savedOrder.getId());
+       // kafkaTemplate.send("order-events", "New order created: " + savedOrder.getId());
 
         return savedOrder;
     }
