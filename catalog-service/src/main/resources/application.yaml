@@ -1,17 +1,15 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: catalog-service
-
   datasource:
-    url: jdbc:postgresql://localhost:5434/smart_food
-    username: nss
-    password: nss
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5434/catalog_db}
+    username: ${SPRING_DATASOURCE_USERNAME:nss}
+    password: ${SPRING_DATASOURCE_PASSWORD:nss}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-server:
-  port: 8081

@@ -1,45 +1,38 @@
-# 1. THE DEPLOYMENT (The Manager)
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-deployment
+  name: catalog-service-deployment
 spec:
-  # I want exactly 1 running copy for now
   replicas: 1
   selector:
     matchLabels:
-      app: order-service
+      app: catalog-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: catalog-service
     spec:
       containers:
-        - name: order-service
-          image: vmtoriia/my-order-service:1.0
+        - name: catalog-service
+          image: vmtoriia/my-catalog-service:1.0
+          ports:
+            - containerPort: 8081
           env:
-            # These MUST match the credentials my Postgres container actually uses!
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/order_db"
             - name: SPRING_DATASOURCE_USERNAME
               value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
               value: "admin"
-            - name: CATALOG_SERVICE_URL
-              value: "http://catalog-service:8081"
-
 ---
-# 2. THE SERVICE (The Network Hub)
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-service
+  name: catalog-service
 spec:
   selector:
-    app: order-service
+    app: catalog-service
   ports:
     - protocol: TCP
-      port: 8082
-      targetPort: 8082
+      port: 8081
+      targetPort: 8081

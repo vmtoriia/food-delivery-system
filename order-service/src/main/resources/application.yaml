@@ -5,13 +5,16 @@ spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:postgresql://localhost:5434/smart_food
-    username: nss
-    password: nss
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5434/smart_food}
+    username: ${SPRING_DATASOURCE_USERNAME:nss}
+    password: ${SPRING_DATASOURCE_PASSWORD:nss}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+catalog-service:
+  url: ${CATALOG_SERVICE_URL:http://localhost:8081}

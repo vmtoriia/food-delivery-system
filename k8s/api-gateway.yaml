@@ -33,7 +33,6 @@ kind: Service
 metadata:
   name: api-gateway
 spec:
-  # This is my true Front Door!
   type: LoadBalancer
   selector:
     app: api-gateway
