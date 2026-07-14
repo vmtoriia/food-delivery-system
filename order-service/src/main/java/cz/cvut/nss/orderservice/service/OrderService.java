@@ -76,9 +76,7 @@ public class OrderService {
 
         order.setStatus(newStatus);
         Order savedOrder = orderRepository.save(order);
-
-        // Відправляємо івент в Kafka про зміну статусу
-        kafkaTemplate.send("order-events", "Order " + orderId + " status changed to " + newStatus);
+        //kafkaTemplate.send("order-events", "Order " + orderId + " status changed to " + newStatus);
 
         return savedOrder;
     }
