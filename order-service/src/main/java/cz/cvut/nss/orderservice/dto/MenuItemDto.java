@@ -7,6 +7,8 @@ public record MenuItemDto(
         String name,
         BigDecimal price,
         boolean available,
-        String restaurantId
+        RestaurantDto restaurant
 ) {
+
+    public record RestaurantDto(String id) {}
 }

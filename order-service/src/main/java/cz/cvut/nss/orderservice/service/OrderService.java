@@ -34,7 +34,7 @@ public class OrderService {
         for (OrderItemRequest itemRequest : request.items()) {
             MenuItemDto menuItem = catalogServiceClient.getMenuItem(itemRequest.menuItemId());
 
-            if (!menuItem.available() || !menuItem.restaurantId().equals(request.restaurantId())) {
+            if (!menuItem.available() || !menuItem.restaurant().id().equals(request.restaurantId())) {
                 throw new IllegalArgumentException("Menu item " + menuItem.name() + " is unavailable or invalid.");
             }
 
