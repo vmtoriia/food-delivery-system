@@ -1,0 +1,24 @@
+services:
+  - name: order-service
+    image: vmtoriia/my-order-service:1.0
+    port: 8082
+    extraEnv:
+      - name: CATALOG_SERVICE_URL
+        value: "http://catalog-service:8081"
+      - name: SPRING_DATASOURCE_URL
+        value: "jdbc:postgresql://postgres-service:5432/order_db"
+      - name: SPRING_DATASOURCE_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_PASSWORD
+        value: "admin"
+
+  - name: catalog-service
+    image: vmtoriia/my-catalog-service:1.0
+    port: 8081
+    extraEnv:
+      - name: SPRING_DATASOURCE_URL
+        value: "jdbc:postgresql://postgres-service:5432/order_db"
+      - name: SPRING_DATASOURCE_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_PASSWORD
+        value: "admin"
